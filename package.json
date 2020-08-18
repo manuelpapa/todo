@@ -8,10 +8,11 @@
     "@testing-library/user-event": "^7.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3"
   },
   "scripts": {
-    "api": "json-server --watch db.json --port 6000",
+    "api": "json-server --watch db.json --port 3333",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
