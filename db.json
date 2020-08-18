@@ -1,3 +1,18 @@
 {
-  "todos": []
+  "samples": [
+    {
+      "id": 1,
+      "genre": "classic",
+      "artist": "Mozart",
+      "track": "Mondscheinsonate",
+      "timecode": "0:23"
+    },
+    {
+      "id": 2,
+      "genre": "neosoul",
+      "artist": "Kaytranada",
+      "track": "Glowed up",
+      "timecode": "1:45"
+    }
+  ]
 }
