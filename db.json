@@ -4,15 +4,22 @@
       "id": 1,
       "genre": "classic",
       "artist": "Mozart",
-      "track": "Mondscheinsonate",
+      "title": "Mondscheinsonate",
       "timecode": "0:23"
     },
     {
       "id": 2,
       "genre": "neosoul",
       "artist": "Kaytranada",
-      "track": "Glowed up",
+      "title": "Glowed up",
       "timecode": "1:45"
+    },
+    {
+      "id": 3,
+      "genre": "electro",
+      "artist": "Justice",
+      "title": "Love S.O.S.",
+      "timecode": "2:05"
     }
   ]
 }

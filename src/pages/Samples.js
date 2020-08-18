@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import fetchSamples from "../api/samplesApi";
-import List from "../components/List";
-import ListItem from "../components/ListItem";
-import ListItemText from "../components/ListItemText";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 export default function Samples() {
   const [samples, setSamples] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [query, setQuery] = useState("");
 
   useEffect(() => {
@@ -17,33 +14,39 @@ export default function Samples() {
     fetchData();
   }, []);
 
-  if (isLoading || samples === null) {
-    return <h2>Loading</h2>;
-  }
-
   return (
     <>
       <header>
-        Samples{" "}
+        Search Samples{" "}
         <input
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Enter name"
         />
       </header>
-      <main>
-        <List>
-          {samples.map((sample) => (
-            <ListItem key={sample.id}>
-              <ListItemText
-                primary={sample.track}
-                secondary={sample.artist}
-                third={sample.genre}
-              />
-            </ListItem>
-          ))}
-        </List>
-      </main>
+
+      <Router>
+        <div className="App">
+          <Switch>
+            <header className="App-header">
+              <p>Sample List</p>
+            </header>
+            <Route path="/samples:track">
+              <Samples />
+            </Route>
+          </Switch>
+
+          <Link to="/samples:track">Tracksearch</Link>
+        </div>
+      </Router>
+
+      <div classname="app">
+        {samples?.map((sample) => (
+          <div key={sample.id}>
+            {sample.title} by {sample.artist}
+          </div>
+        ))}
+      </div>
     </>
   );
 }
