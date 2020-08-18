@@ -1,22 +1,19 @@
 .App {
-  text-align: center;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
 .App-header {
   background-color: #282c34;
-
+  padding: 20px 0;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.App-main,
+* {
+  border-bottom: 1px solid #bbb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App-footer {
 }
