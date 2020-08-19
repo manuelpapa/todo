@@ -23,7 +23,8 @@ export default function Home() {
       </div>
       {samples?.map((sample) => (
         <div key={sample.id}>
-          {sample.title} <i>by</i> {sample.artist} <i>in</i> {sample.genre}
+          {sample.title} <i>by</i> {sample.artist} <i>in</i> {sample.genre}{" "}
+          <i>at</i> {sample.timecode} | created {sample.createdAt}
         </div>
       ))}
     </div>

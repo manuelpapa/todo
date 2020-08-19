@@ -1,3 +1,4 @@
+import "./AddSample.css";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { postSamples } from "../api/fetchSamples";
@@ -13,6 +14,7 @@ export default function AddSample() {
   const [artist, setArtist] = useState("");
   const [genre, setGenre] = useState("");
   const [timecode, setTimecode] = useState("");
+  const [setCreationtime] = useState("");
 
   function handleTitleChange(event) {
     setTitle(event.target.value);
@@ -21,67 +23,93 @@ export default function AddSample() {
     setArtist(event.target.value);
   }
   function handleGenreChange(event) {
-    setArtist(event.target.value);
+    setGenre(event.target.value);
   }
   function handleTimecodeChange(event) {
-    setArtist(event.target.value);
+    setTimecode(event.target.value);
   }
+
   async function handleSubmit(event) {
     event.preventDefault();
+
+    const today = new Date();
+    const date = `${today.getFullYear()} - ${
+      today.getMonth() + 1
+    } - ${today.getDate()} `;
+    const time =
+      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    const dateTime = date + time;
+
     await postSamples({
       title,
       artist,
       genre,
       timecode,
-      createdAt: Date.now(),
+      createdAt: dateTime,
     });
     setTitle("");
     setArtist("");
     setGenre("");
     setTimecode("");
+    setCreationtime("");
   }
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Title:
-          <input type="text" value={title} onChange={handleTitleChange} />
-        </label>
-        <label>
-          Artist:
-          <input type="text" value={artist} onChange={handleArtistChange} />
-        </label>
-        <label>
-          Genre:
-          <input type="text" value={genre} onChange={handleGenreChange} />
-        </label>
-        <label>
-          Timecode:
-          <input type="text" value={timecode} onChange={handleTimecodeChange} />
-        </label>
-        <input type="submit" value="Add Sample" />
-      </form>
-      <Link to="/">Samples</Link>
+      <div className="AddSample">
+        <div className="AddSample-header">
+          <h2>Papas Samplebox</h2>
+        </div>
+
+        <div className="AddSample-main">
+          <form onSubmit={handleSubmit}>
+            <label>
+              Title:
+              <input
+                className="title"
+                type="text"
+                placeholder="Title"
+                value={title}
+                onChange={handleTitleChange}
+              />
+            </label>
+            <label>
+              Artist:
+              <input
+                className="artist"
+                type="text"
+                placeholder="Artist"
+                value={artist}
+                onChange={handleArtistChange}
+              />
+            </label>
+            <label>
+              Genre:
+              <input
+                className="genre"
+                type="text"
+                placeholder="Genre"
+                value={genre}
+                onChange={handleGenreChange}
+              />
+            </label>
+            <label>
+              Timecode:
+              <input
+                className="timecode"
+                type="time"
+                step="00.01"
+                placeholder="Timecode"
+                value={timecode}
+                onChange={handleTimecodeChange}
+              />
+            </label>
+
+            <input className="submit" type="submit" value="Add Sample" />
+          </form>
+          <Link to="/">Samples</Link>
+        </div>
+      </div>
     </>
-
-    // <div className="AddSample">
-    //   <div className="AppSample-header">
-    //     <div>
-    //       <Link to="/">Samples</Link> Add sample
-    //     </div>
-    //     <h2>Papas Samplebox</h2>
-    //   </div>
-
-    //   <div className="AppSample-main">
-    //     <form>
-    //       <input placeholder="Title" />
-    //       <input placeholder="Artist" />
-    //       <input placeholder="Genre" />
-    //       <input placeholder="Timecode" />
-    //       <button onClick={AddSample}>Add</button>
-    //     </form>
-    //   </div>
-    // </div>
   );
 }
