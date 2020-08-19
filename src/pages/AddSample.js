@@ -15,6 +15,7 @@ export default function AddSample() {
   const [genre, setGenre] = useState("");
   const [timecode, setTimecode] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   function handleTitleChange(event) {
     setTitle(event.target.value);
@@ -40,18 +41,28 @@ export default function AddSample() {
       today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     const dateTime = date + time;
 
-    await postSamples({
+    setLoading(true);
+    setError(false);
+    const sample = {
       title,
       artist,
       genre,
       timecode,
       createdAt: dateTime,
-    });
-    setTitle("");
-    setArtist("");
-    setGenre("");
-    setTimecode("");
-    setLoading(false);
+    };
+
+    try {
+      await postSamples(sample);
+      setTitle("");
+      setArtist("");
+      setGenre("");
+      setTimecode("");
+    } catch (error) {
+      console.error(error);
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -109,8 +120,9 @@ export default function AddSample() {
               className="submit"
               type="submit"
               value="Add Sample"
-              disabled={!title || !artist || !loading}
+              disabled={!title || !artist || loading}
             />
+            {error && <p>Something bad happened ☹</p>}
           </form>
           <Link to="/">Samples</Link>
         </div>
