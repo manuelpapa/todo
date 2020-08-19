@@ -1,65 +1,43 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { fetchSamples, addSamples } from "./api/samplesApi";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useHistory,
-} from "react-router-dom";
 
 function App() {
   const [samples, setSamples] = useState(null);
-  const [addSamples, setAddSamples] = useState(false);
-
-  // let history = useHistory();
+  async function doFetch() {
+    const fetchData = await fetchSamples();
+    setSamples(fetchData);
+  }
 
   useEffect(() => {
-    async function doFetch() {
-      const samples = await fetchSamples();
-      setSamples(samples);
-    }
     doFetch();
-  }, [addSamples]);
+  }, []);
 
-  // async function handleClick() {
-  //   history.push("/add-sample")
-  // }
+  function addSample() {
+    addSamples("Hello", "Artist", "Track").then(doFetch);
+  }
 
   return (
     <div className="App">
-      <header className="App-header">
-        Add Samples{" "}
-        <input
-          value={addSamples}
-          onChange={(event) => setAddSamples(event.target.value)}
-          placeholder="Enter title"
-        />
-      </header>
+      <div className="App-header">
+        <h2>Papas Samplebox</h2>
+      </div>
 
-      <Router>
-        <div className="App-main">
-          {samples?.map((sample) => (
-            <div key={sample.id}>
-              {sample.title} <i>by</i> {sample.artist} <i>in</i> {sample.genre}
-            </div>
-          ))}
-
-          <Switch>
-            <Route path="/samples/:title">
-              <h2>Titles</h2>
-            </Route>
-            <Route path="/samples/:artist">
-              <h2>Artists</h2>
-            </Route>
-          </Switch>
-        </div>
-        <div className="App-footer">
-          <Link to="/titles">Titles</Link>
-          <Link to="/artists">Artists</Link>
-        </div>
-      </Router>
+      <div className="App-main">
+        {samples?.map((sample) => (
+          <div key={sample.id}>
+            {sample.title} <i>by</i> {sample.artist} <i>in</i> {sample.genre}
+          </div>
+        ))}
+        <form>
+          <input placeholder="Title" />
+          <input placeholder="Artist" />
+          <input placeholder="Genre" />
+          <input placeholder="Timecode" />
+          <input placeholder="Used?" />
+          <button onClick={addSample}>Add</button>
+        </form>
+      </div>
     </div>
   );
 }
