@@ -51,7 +51,6 @@ export default function AddSample() {
     setArtist("");
     setGenre("");
     setTimecode("");
-    setCreationtime("");
   }
 
   return (
@@ -105,7 +104,12 @@ export default function AddSample() {
               />
             </label>
 
-            <input className="submit" type="submit" value="Add Sample" />
+            <input
+              className="submit"
+              type="submit"
+              value="Add Sample"
+              disabled={!title || !artist}
+            />
           </form>
           <Link to="/">Samples</Link>
         </div>
