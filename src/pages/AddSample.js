@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { postSamples } from "../api/fetchSamples";
 // import { postSamples } from "../api/fetchSamples";
 
 // export default function AddSample() {
@@ -10,6 +11,8 @@ import { Link } from "react-router-dom";
 export default function AddSample() {
   const [title, setTitle] = useState("");
   const [artist, setArtist] = useState("");
+  const [genre, setGenre] = useState("");
+  const [timecode, setTimecode] = useState("");
 
   function handleTitleChange(event) {
     setTitle(event.target.value);
@@ -17,8 +20,25 @@ export default function AddSample() {
   function handleArtistChange(event) {
     setArtist(event.target.value);
   }
-  function handleSubmit(event) {
+  function handleGenreChange(event) {
+    setArtist(event.target.value);
+  }
+  function handleTimecodeChange(event) {
+    setArtist(event.target.value);
+  }
+  async function handleSubmit(event) {
     event.preventDefault();
+    await postSamples({
+      title,
+      artist,
+      genre,
+      timecode,
+      createdAt: Date.now(),
+    });
+    setTitle("");
+    setArtist("");
+    setGenre("");
+    setTimecode("");
   }
 
   return (
@@ -31,6 +51,14 @@ export default function AddSample() {
         <label>
           Artist:
           <input type="text" value={artist} onChange={handleArtistChange} />
+        </label>
+        <label>
+          Genre:
+          <input type="text" value={genre} onChange={handleGenreChange} />
+        </label>
+        <label>
+          Timecode:
+          <input type="text" value={timecode} onChange={handleTimecodeChange} />
         </label>
         <input type="submit" value="Add Sample" />
       </form>
