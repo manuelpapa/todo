@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { fetchSamples, addSamples } from "./api/samplesApi";
+import fetchSamples from "./api/fetchSamples";
+import addSamples from "./api/postSamples";
 
 function App() {
   const [samples, setSamples] = useState(null);
@@ -34,7 +35,6 @@ function App() {
           <input placeholder="Artist" />
           <input placeholder="Genre" />
           <input placeholder="Timecode" />
-          <input placeholder="Used?" />
           <button onClick={addSample}>Add</button>
         </form>
       </div>
