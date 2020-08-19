@@ -14,7 +14,7 @@ export default function AddSample() {
   const [artist, setArtist] = useState("");
   const [genre, setGenre] = useState("");
   const [timecode, setTimecode] = useState("");
-  const [setCreationtime] = useState("");
+  const [loading, setLoading] = useState(false);
 
   function handleTitleChange(event) {
     setTitle(event.target.value);
@@ -51,6 +51,7 @@ export default function AddSample() {
     setArtist("");
     setGenre("");
     setTimecode("");
+    setLoading(false);
   }
 
   return (
@@ -108,7 +109,7 @@ export default function AddSample() {
               className="submit"
               type="submit"
               value="Add Sample"
-              disabled={!title || !artist}
+              disabled={!title || !artist || !loading}
             />
           </form>
           <Link to="/">Samples</Link>
