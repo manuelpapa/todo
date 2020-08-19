@@ -1,44 +1,20 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";
-import { fetchSamples, addSamples } from "./api/samplesApi";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import AddSample from "./pages/AddSample";
 
 function App() {
-  const [samples, setSamples] = useState(null);
-  async function doFetch() {
-    const fetchData = await fetchSamples();
-    setSamples(fetchData);
-  }
-
-  useEffect(() => {
-    doFetch();
-  }, []);
-
-  function addSample() {
-    addSamples("Hello", "Artist", "Track").then(doFetch);
-  }
-
   return (
-    <div className="App">
-      <div className="App-header">
-        <h2>Papas Samplebox</h2>
-      </div>
-
-      <div className="App-main">
-        {samples?.map((sample) => (
-          <div key={sample.id}>
-            {sample.title} <i>by</i> {sample.artist} <i>in</i> {sample.genre}
-          </div>
-        ))}
-        <form>
-          <input placeholder="Title" />
-          <input placeholder="Artist" />
-          <input placeholder="Genre" />
-          <input placeholder="Timecode" />
-          <input placeholder="Used?" />
-          <button onClick={addSample}>Add</button>
-        </form>
-      </div>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/add">
+          <AddSample />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
