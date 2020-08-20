@@ -2,6 +2,7 @@ import "./AddSample.css";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { postSamples } from "../api/fetchSamples";
+import Container from "../components/Container";
 
 export default function AddSample() {
   const [title, setTitle] = useState("");
@@ -60,7 +61,7 @@ export default function AddSample() {
   }
 
   return (
-    <>
+    <Container>
       <div className="AddSample">
         <div className="AddSample-header">
           <h2>Papas Samplebox</h2>
@@ -121,6 +122,6 @@ export default function AddSample() {
           <Link to="/">Samples</Link>
         </div>
       </div>
-    </>
+    </Container>
   );
 }

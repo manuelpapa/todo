@@ -5,13 +5,20 @@ import useAsync from "../hooks/useAsync";
 import SampleListItem from "../components/SampleListItem";
 import Container from "../components/Container";
 import styled from "@emotion/styled";
+import Button from "../components/Button";
 
-const HeaderContainer = styled(Container)`
+const FooterContainer = styled(Container)`
   display: flex;
-  flex-direction: column;
-  padding: 20px 20px;
-  background-image: var(--bg-gradient);
-  color: #770e31;
+  justify-content: center;
+
+  color: white;
+`;
+
+const AddButton = styled(Button)`
+  border-radius: 200px;
+  font-weight: 100;
+  font-size: 3rem;
+  padding: 8px 20px;
 `;
 
 export default function Home() {
@@ -19,13 +26,10 @@ export default function Home() {
 
   return (
     <Container>
-      <HeaderContainer>
-        <div>
-          <Link to="/add">Add Sample</Link>
-          {loading && <div>Loading...</div>}
-        </div>
-        <h2>Papas Samplebox</h2>
-      </HeaderContainer>
+      {loading && <div>Loading...</div>}
+
+      <h2>Papas Samplebox</h2>
+
       {error && <div>ERROR!</div>}
       {loading && <div>Loading...</div>}
       {samples?.map((sample) => (
@@ -34,6 +38,12 @@ export default function Home() {
           <i>at</i> {sample.timecode} | created {sample.createdAt}
         </SampleListItem>
       ))}
+
+      <FooterContainer>
+        <Link to="/add">
+          <AddButton>+</AddButton>
+        </Link>
+      </FooterContainer>
     </Container>
   );
 }

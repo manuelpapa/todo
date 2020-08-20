@@ -1,12 +1,11 @@
 import styled from "@emotion/styled";
 
 const Button = styled.button`
-  background: #c6244f;
-  color: #770e31;
+  background: #4bc4db;
   padding: 10px;
   border-radius: 15px;
   border: none;
-  color: ${(props) => (props.disabled ? "white" : "#770e31")};
+  color: ${(props) => (props.disabled ? "white" : "#D1F5F8")};
 `;
 
 export default Button;
