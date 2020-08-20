@@ -1,7 +1,18 @@
 .AddSample {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.AddSample > * {
+  flex-basis: 100%;
 }
 
 .AddSample-header {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px;
+  background-image: var(--bg-gradient);
 }
 
 .AddSample-main {
