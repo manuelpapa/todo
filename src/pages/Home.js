@@ -1,6 +1,6 @@
 import React from "react";
-import { fetchSamples } from "../api/fetchSamples";
 import { Link } from "react-router-dom";
+import { fetchSamples } from "../api/fetchSamples";
 import useAsync from "../hooks/useAsync";
 
 export default function Home() {
